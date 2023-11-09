@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>That Stuff Page</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap');
+    
+    body {
+        width:100vw;
+        height:fit-content;
+        margin: 0px;
+        background: rgb(255, 255, 255);
+        font-family: 'IBM Plex Mono', monospace;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    #top-Fade {
+        width:100vw;
+        height:75px;
+        position:fixed;
+        top:0px;
+        left:0px;
+        background: linear-gradient(to bottom, white, transparent);
+    }
+
+    #bottom-Fade {
+        width:100vw;
+        height:75px;
+        position:fixed;
+        bottom:0px;
+        left:0px;
+        background: linear-gradient(to top, white, transparent);
+    }
+
+    #top-Fade-1 {
+        width:100vw;
+        height:150px;
+        position:fixed;
+        top:0px;
+        left:0px;
+        background: linear-gradient(to bottom, white, transparent);
+    }
+
+    #bottom-Fade-1 {
+        width:100vw;
+        height:150px;
+        position:fixed;
+        bottom:0px;
+        left:0px;
+        background: linear-gradient(to top, white, transparent);
+    }
+
+    #top-Fade-2 {
+        width:100vw;
+        height:150px;
+        position:fixed;
+        top:0px;
+        left:0px;
+        background: linear-gradient(to bottom, white, transparent);
+    }
+
+    #bottom-Fade-2 {
+        width:100vw;
+        height:150px;
+        position:fixed;
+        bottom:0px;
+        left:0px;
+        background: linear-gradient(to top, white, transparent);
+    }
+
+    @media (min-width:500px) {
+        body {
+            width:100vw;
+            height:fit-content;
+            margin: 0px;
+            background: rgb(255, 255, 255);
+            font-family: 'IBM Plex Mono', monospace;
+            user-select: none;
+            -webkit-user-select: none;
+            display:none;
+        }
+    }
+
+    #backText {
+        width:100vw;
+        overflow: hidden;
+        word-break: break-all;
+        height:100%;
+        overflow: hidden;
+        position:absolute;
+        color:rgb(245, 245, 245);
+        top:0px;
+        left:0px;
+        z-index: -1;
+        font-size:20px;
+    }
+
+    #pageTitle {
+        width:calc(100vw - 50px);
+        font-size: 35px;
+        font-weight:1000;
+        color: rgb(55, 0, 255);
+        position:absolute;
+        top:25px;
+        left:50%;
+        transform:translate(-50%);
+        text-align:center;
+    }
+
+    #amountInput {
+        width:calc(100vw - 80px);
+        position:absolute;
+        top:225px;
+        left:50%;
+        transform:translate(-50%);
+        border-radius: 15px;
+        background:rgb(55, 0, 255);
+        border:none;
+        padding:15px 15px;
+        font-size: 20px;
+        font-weight: 900;
+        color:white;
+    }
+
+    #addressInput {
+        width:calc(100vw - 80px);
+        position:absolute;
+        top:300px;
+        left:50%;
+        transform:translate(-50%);
+        border-radius: 15px;
+        background:rgb(55, 0, 255);
+        border:none;
+        padding:15px 15px;
+        font-size: 20px;
+        font-weight: 900;
+        color:white;
+    }
+
+    #placeOrderButton {
+        width:calc(100vw - 50px);
+        position:absolute;
+        bottom:25px;
+        left:50%;
+        transform:translate(-50%);
+        border-radius: 15px;
+        background:rgb(255, 255, 255);
+        border:none;
+        padding:15px 15px;
+        font-size: 20px;
+        font-weight: 900;
+        color:rgb(55, 0, 255);
+        border: 1px solid rgb(235, 235, 235);
+        opacity: 0.5;
+    }
+
+    ::placeholder {
+        color:rgb(255, 255, 255);
+    }
+
+    :focus {
+        outline:none;
+    }
+
+    html {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+    }
+</style>
+
+<!-- CSS for the dropdown -->
+<style>
+    .dropdown-container {
+        position: relative;
+        /* display: inline-block; */
+        text-align:left;
+        width:100vw;
+    }
+
+    .dropdown-button {
+        width:calc(100vw - 50px);
+        position:absolute;
+        top:150px;
+        left:50%;
+        transform:translate(-50%);
+        border-radius: 15px;
+        background:rgb(55, 0, 255);
+        border:none;
+        padding:15px 15px;
+        font-size: 20px;
+        font-weight: 900;
+        color:white;
+        cursor: pointer;
+    }
+
+    #dropdownContent {
+        position: fixed;
+        bottom:-600px;
+        left:0px;
+        background-color: #f9f9f9;
+        width:100vw;
+        height:fit-content;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        transition: .5s;
+    }
+
+    .dropdown-item {
+        padding:20px 10px ;
+        font-weight: 800;
+        text-align:center;
+        text-decoration: none;
+        display: block;
+        color: #333;
+        border-bottom: 1px solid rgb(235, 235, 235);
+    }
+</style>
+
+<body>
+    <div id="backText"></div>
+    <div class="dropdown-container">
+        <button class="dropdown-button" id="dropdownButton">Select City</button>
+        <div class="dropdown-content" id="dropdownContent">
+            <a href="#" class="dropdown-item" data-value="Oshawa">Oshawa</a>
+            <a href="#" class="dropdown-item" data-value="Ajax">Ajax</a>
+            <a href="#" class="dropdown-item" data-value="Toronto">Toronto</a>
+            <a href="#" class="dropdown-item" data-value="Bowmanville">Bowmanville</a>
+            <a href="#" class="dropdown-item" data-value="Pickering">Pickering</a>
+        </div>
+    </div>
+
+    <form>
+        <input type="text" id="amountInput" placeholder="Amount" inputmode="numeric">
+        <input type="text" id="addressInput" placeholder="Address">
+    </form>
+
+    <id id="suggestionList">
+        <!-- Suggestions will be displayed here -->
+    </id>
+
+    <div id="top-Fade"></div>
+    <div id="top-Fade-1"></div>
+    <div id="top-Fade-2">
+        <div id="pageTitle">That Stuff</div>
+    </div>
+
+    <div id="bottom-Fade"></div>
+    <div id="bottom-Fade-1"></div>
+    <div id="bottom-Fade-2">
+        <button id="placeOrderButton">Place Order</button>
+    </div>
+</body>
+
+<script>
+    // JavaScript for the dropdown
+    const dropdownButton = document.getElementById("dropdownButton");
+    const dropdownContent = document.getElementById("dropdownContent");
+
+    document.querySelector("body").addEventListener("click", function(e) {
+        console.log(e)
+        // if (dropdownContent.style.display === "block") {
+        //     dropdownContent.style.display = "none";
+        //     dropdownContent.style.bottom = "-650px";
+        // } else {
+        //     dropdownContent.style.display = "block";
+        //     dropdownContent.style.bottom = "0px";
+        // }
+    })
+
+    dropdownButton.addEventListener("click", function() {
+        if (dropdownContent.style.bottom === "0px") {
+            dropdownContent.style.bottom = "-650px";
+        } else {
+            dropdownContent.style.bottom = "0px";
+        }
+    });
+
+    // Add click event listeners to each dropdown item
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    dropdownItems.forEach(function(item) {
+        item.addEventListener("click", function(event) {
+            event.preventDefault();
+            const selectedValue = this.getAttribute("data-value");
+            dropdownButton.textContent = selectedValue;
+            dropdownContent.style.bottom = "-650px";
+        });
+    });
+</script>
+
+<script>
+    var cities = ["Oshawa", "Ajax", "Toronto", "Bowmanville", "Pickering"]
+    // Get the input field and suggestion list
+    const addressInput = document.getElementById("addressInput");
+    const suggestionList = document.getElementById("suggestionList");
+
+    function generateBinaryDigits(length) {
+        let binaryString = '';
+        for (let i = 0; i < length; i++) {
+            // Generate a random 0 or 1
+            const bit = Math.floor(Math.random() * 2);
+            binaryString += bit;
+        }
+        return binaryString;
+    }
+
+    const binaryDigits = generateBinaryDigits(10000);
+
+    document.getElementById("backText").textContent = binaryDigits
+
+    // Add an event listener to the input field for address suggestions
+    addressInput.addEventListener("input", function () {
+        const query = addressInput.value;
+
+        if (query) {
+            // Clear previous suggestions
+            suggestionList.innerHTML = '';
+
+            // Make a request to the Nominatim API
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                // Display the top 5 results
+                data.slice(0, 5).forEach(result => {
+                    // console.log(result)
+                    var info = {
+                        "Address": "",
+                        "City": "",
+                        "Province/State": "",
+                        "Country": ""
+                    }
+
+                    // Split the string into an array based on commas
+                    const addressArray = String(result.display_name).split(', ');
+
+                    // Extract the last element of the array (country)
+                    info.Country = addressArray[addressArray.length - 1];
+
+                    info.Address = result.display_name.slice(",")
+                    if(info.Country == "Canada") {
+                        const suggestionItem = document.createElement("li");
+                        suggestionItem.textContent = result.display_name;
+                        suggestionList.appendChild(suggestionItem);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching Nominatim data:", error);
+            });
+        }
+    });
+</script>
+
+</html>
